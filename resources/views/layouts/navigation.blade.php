@@ -3,8 +3,8 @@
         <img src="{{ asset('img/logo/logo.png') }}" class="w-32">
     </div>
     <ul class="p-4 [&>li]:my-2">
-        <li class="px-6 py-3 rounded hover:bg-blue-50 @if (Request::routeIs('home')) bg-blue-50 @endif">
-            <a href="#" class="flex items-center">
+        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('home')) bg-blue-50 @endif">
+            <a href="{{ route('home') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -15,32 +15,20 @@
             </a>
         </li>
 
-        <li class="px-6 py-3 rounded hover:bg-blue-50 @if (Request::routeIs('books')) bg-blue-50 @endif">
-            <a href="{{ route('books') }}" class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                </svg>
-
-                <span class="ml-4">Books</span>
-            </a>
-        </li>
-
-        <li class="px-6 py-3 rounded hover:bg-blue-50 @if (Request::routeIs('bookmark')) bg-blue-50 @endif">
-            <a href="#" class="flex items-center">
+        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('bookmark')) bg-blue-50 @endif">
+            <a href="{{ route('bookmark') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
 
-                <span class="ml-4">Bookmark</span>
+                <span class="ml-4">Koleksi</span>
             </a>
         </li>
 
-        <li class="px-6 py-3 rounded hover:bg-blue-50 @if (Request::routeIs('settings')) bg-blue-50 @endif">
-            <a href="#" class="flex items-center">
+        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('settings')) bg-blue-50 @endif">
+            <a href="{{ route('settings') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -52,8 +40,8 @@
             </a>
         </li>
 
-        <li class="px-6 py-3 rounded hover:bg-blue-50 @if (Request::routeIs('profile')) bg-blue-50 @endif">
-            <a href="{{ route('profile') }}" class="flex items-center">
+        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('profile')) bg-blue-50 @endif">
+            <a href="{{ route('profile') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"

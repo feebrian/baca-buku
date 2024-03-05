@@ -29,10 +29,40 @@
             </ul>
         </div>
 
-        <div class="flex items-center space-x-4 select-none">
-            <span class="hidden text-sm text-start md:block">adamadtm__</span>
-            <img src="{{ asset('img/kaneki.jpg') }}" alt="kaneki profile picture"
-                class="object-cover w-10 rounded-full cursor-pointer">
+        <div class="flex items-center space-x-4 select-none" x-data="{ profileDropdown: false }">
+            {{-- <span class="hidden text-sm text-start md:block">adamadtm__</span> --}}
+            <div class="relative">
+                <img @click="profileDropdown = !profileDropdown" @click.away="profileDropdown = false"
+                    src="{{ auth()->user()->profile_picture }}" alt="kaneki profile picture"
+                    class="object-cover w-10 rounded-full cursor-pointer">
+
+                <ul x-show="profileDropdown" x-cloak x-transition:enter="transition ease-out duration-150"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    class="absolute right-0 p-2 rounded shadow top-full bg-gray-50">
+                    <li class="p-2 text-sm rounded hover:bg-gray-100">
+                        <a href="">link 1</a>
+                    </li>
+                    <li class="p-2 text-sm rounded hover:bg-gray-100">
+                        <a href="">link 2</a>
+                    </li>
+                    <hr>
+                    <li class="p-2 text-sm rounded hover:bg-gray-100">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="flex items-center gap-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="3" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                                </svg>
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
