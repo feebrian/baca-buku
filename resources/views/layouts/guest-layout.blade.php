@@ -20,7 +20,7 @@
 <body>
     <div class="flex items-center justify-center w-screen h-screen bg-gray-100">
         <main class="w-80">
-            {{ $slot }}
+            @yield('content')
         </main>
     </div>
 </body>

@@ -1,9 +1,7 @@
-<aside class="fixed top-0 left-0 hidden w-64 h-full bg-white md:block">
-    <div class="flex items-center justify-center p-4">
-        <img src="{{ asset('img/logo/logo.png') }}" class="w-32">
-    </div>
-    <ul class="p-4 [&>li]:my-2">
-        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('home')) bg-blue-50 @endif">
+<div class="drawer-side">
+    <label for="side-nav" aria-label="close sidebar" class="drawer-overlay"></label>
+    <ul class="w-64 min-h-full p-4 menu bg-base-200 text-base-content">
+        <li>
             <a href="{{ route('home') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
@@ -14,8 +12,7 @@
                 <span class="ml-4">Home</span>
             </a>
         </li>
-
-        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('bookmark')) bg-blue-50 @endif">
+        <li>
             <a href="{{ route('bookmark') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
@@ -26,8 +23,7 @@
                 <span class="ml-4">Koleksi</span>
             </a>
         </li>
-
-        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('settings')) bg-blue-50 @endif">
+        <li>
             <a href="{{ route('settings') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
@@ -39,9 +35,7 @@
                 <span class="ml-4">Settings</span>
             </a>
         </li>
-
-        <li class="rounded hover:bg-blue-50 @if (Request::routeIs('profile')) bg-blue-50 @endif">
-            <a href="{{ route('profile') }}" class="flex items-center px-6 py-3">
+        <li><a href="{{ route('profile') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -52,4 +46,4 @@
             </a>
         </li>
     </ul>
-</aside>
+</div>

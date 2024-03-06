@@ -1,4 +1,7 @@
-<x-guest-layout>
+@extends('layouts.guest-layout')
+
+@section('content')
+    @csrf
     <div class="p-4 bg-white rounded-md shadow">
         <h2 class="text-2xl font-semibold">Login</h2>
         <form action="{{ route('login.perform') }}" method="POST">
@@ -23,4 +26,4 @@
             </div>
         </form>
     </div>
-</x-guest-layout>
+@endsection

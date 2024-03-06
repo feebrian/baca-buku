@@ -1,22 +1,28 @@
-<x-guest-layout>
+@extends('layouts.guest-layout')
+
+@section('content')
     <div class="p-4 bg-white rounded-md shadow">
         <h2 class="text-2xl font-semibold">Register</h2>
         <form action="{{ route('register.perform') }}" method="POST">
             @csrf
-            <label class="block mt-4 ">
-                <span class="text-gray-700">Username</span>
-                <input type="text" name="username" placeholder="ladybug"
-                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label class="w-full max-w-xs form-control">
+                <div class="label">
+                    <span class="label-text">Username</span>
+                </div>
+                <input type="text" placeholder="ladybug" name="username" class="w-full max-w-xs input input-bordered" />
             </label>
-            <label class="block mt-4 ">
-                <span class="text-gray-700">Email</span>
-                <input type="email" name="email" placeholder="example@somewhere.com"
-                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label class="w-full max-w-xs form-control">
+                <div class="label">
+                    <span class="label-text">Email</span>
+                </div>
+                <input type="email" placeholder="example@somewhere.com" name="email"
+                    class="w-full max-w-xs input input-bordered" />
             </label>
-            <label class="block mt-4 ">
-                <span class="text-gray-700">Password</span>
-                <input type="password" name="password"
-                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label class="w-full max-w-xs form-control">
+                <div class="label">
+                    <span class="label-text">What is your name?</span>
+                </div>
+                <input type="password" name="password" class="w-full max-w-xs input input-bordered" />
             </label>
             <label class="block mt-4 ">
                 <span class="text-gray-700">Repeat passowrd</span>
@@ -33,4 +39,4 @@
             </div>
         </form>
     </div>
-</x-guest-layout>
+@endsection

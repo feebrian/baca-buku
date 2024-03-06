@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
@@ -26,10 +28,6 @@ Route::get('/profile/edit', function () {
     return view('profile.edit');
 })->name('profile.edit');
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
-
 Route::get('/bookmark', function () {
     return view('bookmark');
 })->name('bookmark');
@@ -50,31 +48,42 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
-Route::prefix('admin')
-    ->middleware(['auth'])
-    ->name('admin.')
-    ->group(function () {
+Route::middleware(['auth'])->group(function () {
 
-        Route::prefix('books')
-            ->name('books.')
-            ->group(function () {
-                Route::get('/', [BookController::class, 'index'])->name('index');
-                Route::get('/create', [BookController::class, 'create'])->name('create');
-                Route::post('/', [BookController::class, 'store'])->name('store');
-                Route::get('/details/{slug}', [BookController::class, 'show'])->name('show');
-                Route::get('/{slug}/edit', [BookController::class, 'edit'])->name('edit');
-                Route::put('/{slug}', [BookController::class, 'update'])->name('update');
-                Route::delete('/{slug}', [BookController::class, 'destroy'])->name('destroy');
-            });
+    Route::prefix('admin')
+        ->name('admin.')
+        ->group(function () {
 
-        Route::prefix('categories')
-            ->name('category.')
-            ->group(function () {
-                Route::get('/', [CategoryController::class, 'index'])->name('index');
-                Route::get('/create', [CategoryController::class, 'create'])->name('create');
-                Route::post('/', [CategoryController::class, 'store'])->name('store');
-                Route::get('/{slug}/edit', [CategoryController::class, 'edit'])->name('edit');
-                Route::put('/{slug}', [CategoryController::class, 'update'])->name('update');
-                Route::delete('/{slug}', [CategoryController::class, 'destroy'])->name('destroy');
-            });
-    });
+            Route::prefix('books')
+                ->name('books.')
+                ->group(function () {
+                    Route::get('/', [BookController::class, 'index'])->name('index');
+                    Route::get('/create', [BookController::class, 'create'])->name('create');
+                    Route::post('/', [BookController::class, 'store'])->name('store');
+                    Route::get('/{slug}/edit', [BookController::class, 'edit'])->name('edit');
+                    Route::put('/{slug}', [BookController::class, 'update'])->name('update');
+                    Route::delete('/{slug}', [BookController::class, 'destroy'])->name('destroy');
+                });
+
+            Route::prefix('categories')
+                ->name('category.')
+                ->group(function () {
+                    Route::get('/', [CategoryController::class, 'index'])->name('index');
+                    Route::get('/create', [CategoryController::class, 'create'])->name('create');
+                    Route::post('/', [CategoryController::class, 'store'])->name('store');
+                    Route::get('/{slug}/edit', [CategoryController::class, 'edit'])->name('edit');
+                    Route::put('/{slug}', [CategoryController::class, 'update'])->name('update');
+                    Route::delete('/{slug}', [CategoryController::class, 'destroy'])->name('destroy');
+                });
+        });
+
+    Route::prefix('loan')
+        ->name('loan.')
+        ->group(function () {
+
+            Route::post('/loan', [LoanController::class, 'makeLoan'])->name('perform');
+        });
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/books/details/{slug}', [BookController::class, 'show'])->name('books.show');
+});

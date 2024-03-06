@@ -1,26 +1,23 @@
-<header class="flex items-center h-16 bg-white shadow md:ml-64">
+<header class="flex items-center h-16 bg-white shadow">
     <div class="container flex items-center justify-between p-4 mx-auto">
 
-        <div class="block cursor-pointer md:hidden">
-            <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <label for="side-nav" class="btn btn-square btn-sm btn-ghost drawer-button lg:hidden"><svg
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
-        </div>
+        </label>
 
         <div class="relative hidden md:block">
-            <div class="absolute inset-y-0 flex items-center ml-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            <label class="flex items-center gap-2 input input-sm input-bordered">
+                <input type="text" class="grow" placeholder="Search" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="w-4 h-4 opacity-70">
+                    <path fill-rule="evenodd"
+                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                        clip-rule="evenodd" />
                 </svg>
-            </div>
-
-            <input type="text" placeholder="Search"
-                class="w-full py-2 pl-8 pr-4 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </label>
 
             <ul class="absolute hidden w-full p-2 rounded shadow-sm bg-gray-50">
                 <li class="p-2 rounded hover:bg-gray-100"><a href="">aslkdfjs</a></li>
@@ -36,30 +33,39 @@
                     src="{{ auth()->user()->profile_picture }}" alt="kaneki profile picture"
                     class="object-cover w-10 rounded-full cursor-pointer">
 
-                <ul x-show="profileDropdown" x-cloak x-transition:enter="transition ease-out duration-150"
-                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                    class="absolute right-0 p-2 rounded shadow top-full bg-gray-50">
-                    <li class="p-2 text-sm rounded hover:bg-gray-100">
-                        <a href="">link 1</a>
+                <ul class="absolute right-0 w-56 menu bg-base-200 rounded-box" x-show="profileDropdown" x-cloak
+                    x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 scale-90"
+                    x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+                    <li>
+                        <a>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Item 2
+                        </a>
                     </li>
-                    <li class="p-2 text-sm rounded hover:bg-gray-100">
-                        <a href="">link 2</a>
+                    <li>
+                        <a>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Item 1
+                        </a>
                     </li>
-                    <hr>
-                    <li class="p-2 text-sm rounded hover:bg-gray-100">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="flex items-center gap-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="3" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                                </svg>
-                                Logout
-                            </button>
-                        </form>
+                    <li>
+                        <a>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            Item 3
+                        </a>
                     </li>
                 </ul>
             </div>

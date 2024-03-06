@@ -18,15 +18,28 @@
 </head>
 
 <body>
-    <div class="min-h-screen bg-gray-100">
+    {{-- @include('layouts.navigation')
+
+    <main>
+        @include('layouts.header')
+
+        @yield('content')
+    </main> --}}
+
+    <div class="drawer lg:drawer-open">
+        <input id="side-nav" type="checkbox" class="drawer-toggle" />
+        <div class="flex flex-col drawer-content">
+
+            @include('layouts.header')
+
+            <div class="p-8">
+                @yield('content')
+            </div>
+
+        </div>
 
         @include('layouts.navigation')
 
-        <main>
-            @include('layouts.header')
-
-            {{ $slot }}
-        </main>
     </div>
 </body>
 

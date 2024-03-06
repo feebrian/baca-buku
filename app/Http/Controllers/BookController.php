@@ -38,9 +38,13 @@ class BookController extends Controller
             ->with('success', 'Book created successfully');
     }
 
-    public function show()
+    public function show(string $slug)
     {
-        return view('book-detail');
+        $book = Book::where('slug', $slug)->first();
+
+        return view('book-detail', [
+            'book' => $book,
+        ]);
     }
 
     public function edit(string $slug)
