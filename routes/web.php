@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,5 +65,16 @@ Route::prefix('admin')
                 Route::get('/{slug}/edit', [BookController::class, 'edit'])->name('edit');
                 Route::put('/{slug}', [BookController::class, 'update'])->name('update');
                 Route::delete('/{slug}', [BookController::class, 'destroy'])->name('destroy');
+            });
+
+        Route::prefix('categories')
+            ->name('category.')
+            ->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('index');
+                Route::get('/create', [CategoryController::class, 'create'])->name('create');
+                Route::post('/', [CategoryController::class, 'store'])->name('store');
+                Route::get('/{slug}/edit', [CategoryController::class, 'edit'])->name('edit');
+                Route::put('/{slug}', [CategoryController::class, 'update'])->name('update');
+                Route::delete('/{slug}', [CategoryController::class, 'destroy'])->name('destroy');
             });
     });

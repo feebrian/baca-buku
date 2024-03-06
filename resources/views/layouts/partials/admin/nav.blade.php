@@ -21,11 +21,11 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
                                 </svg>
-                                Buku
+                                Book
                             </summary>
                             <ul>
                                 <li>
-                                    <a href="{{ route('admin.books.index') }}">Booklists</a>
+                                    <a href="{{ route('admin.books.index') }}">Books</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.books.create') }}">Create</a>
@@ -33,7 +33,27 @@
                             </ul>
                         </details>
                     </li>
-                    <li><a>Submenu 2</a></li>
+                    <li>
+                        <details open>
+                            <summary class="font-semibold">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+                                </svg>
+                                Category
+                            </summary>
+                            <ul>
+                                <li>
+                                    <a href="{{ route('admin.category.index') }}">Categories</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.category.create') }}">Create</a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
                 </ul>
             </details>
         </li>

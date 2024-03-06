@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Book\StoreBookRequest;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Book\UpdateBookRequest;
 use App\Models\Book;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
