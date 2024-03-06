@@ -50,7 +50,7 @@
                                     </svg>
                                 </a>
 
-                                <form action="/admin/books/{{ $b->slug }}" method="POST">
+                                <form action="{{ route('admin.books.destroy', ['slug' => $b->slug]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
 
