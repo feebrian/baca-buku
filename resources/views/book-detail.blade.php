@@ -2,8 +2,15 @@
 
 @section('content')
     <div class="container justify-center mx-auto">
-        <div class="flex flex-col max-w-sm p-4 mx-auto lg:max-w-7xl md:max-w-3xl md:flex-row">
-            <div class="flex flex-col place-items-center md:place-items-start">
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-8 h-8 mb-2 cursor-pointer" onclick="return location.href='/home'">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+
+        <div class="flex flex-col max-w-sm mx-auto p -4 lg:max-w-7xl md:max-w-3xl md:flex-row">
+            <div class="flex flex-col place-items-center ">
                 <img src="{{ asset('storage/covers/' . $book->cover) }}" alt="" class="w-40">
                 <span class="mt-2 font-semibold">{{ $book->title }}</span>
                 <span>by
@@ -92,8 +99,8 @@
                         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
                         <button class="btn btn-neutral no-animation">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
                             </svg>
