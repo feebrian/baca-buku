@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->uuid();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->enum('role', ['peminjam', 'petugas', 'admin']);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
+        });
     }
 };

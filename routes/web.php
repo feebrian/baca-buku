@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\Book\BookReviewController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +32,6 @@ Route::get('/profile/edit', function () {
     return view('profile.edit');
 })->name('profile.edit');
 
-Route::get('/bookmark', function () {
-    return view('bookmark');
-})->name('bookmark');
-
 Route::get('/settings', function () {
     return view('settings');
 })->name('settings');
@@ -44,15 +44,18 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('/login', [LoginController::class, 'index'])->name('login.show');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.perform');
-
-    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+    // admin route
     Route::prefix('admin')
         ->name('admin.')
         ->group(function () {
+
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
             Route::prefix('books')
                 ->name('books.')
@@ -77,13 +80,22 @@ Route::middleware(['auth'])->group(function () {
                 });
         });
 
+    // peminjam route
     Route::prefix('loan')
         ->name('loan.')
         ->group(function () {
-
             Route::post('/loan', [LoanController::class, 'makeLoan'])->name('perform');
+        });
+
+    Route::prefix('collections')
+        ->name('collections.')
+        ->group(function () {
+            Route::get('/', [CollectionController::class, 'index'])->name('show');
+            Route::post('/', [CollectionController::class, 'saveBookToCollection'])->name('save');
+            Route::delete('/', [CollectionController::class, 'removeBookFromCollection'])->name('delete');
         });
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/books/details/{slug}', [BookController::class, 'show'])->name('books.show');
+    Route::post('/review', [BookReviewController::class, 'writeReview'])->name('review.perform');
 });

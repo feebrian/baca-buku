@@ -4,12 +4,25 @@
     <div class="w-full">
         <form action="{{ route('admin.books.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <label class="w-full form-control">
-                <div class="label">
-                    <span class="label-text">Book Title</span>
-                </div>
-                <input type="text" name="title" placeholder="Type here" class="w-full input input-bordered" />
-            </label>
+            <div class="md:items-center md:space-x-4 md:flex">
+                <label class="w-full form-control">
+                    <div class="label">
+                        <span class="label-text">Book Title</span>
+                    </div>
+                    <input type="text" name="title" placeholder="Type here" class="w-full input input-bordered" />
+                </label>
+                <label class="w-full max-w-xs form-control">
+                    <div class="label">
+                        <span class="label-text">Book Category</span>
+                    </div>
+                    <select name="category_id" class="select select-bordered">
+                        <option disabled selected>Pick one</option>
+                        @foreach ($categories as $c)
+                            <option value="{{ $c->id }}">{{ $c->name }}</option>
+                        @endforeach
+                    </select>
+                </label>
+            </div>
             <div class="md:items-center md:space-x-4 md:flex">
                 <label class="w-full form-control">
                     <div class="label">

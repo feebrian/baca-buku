@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Requests\Book\UpdateBookRequest;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Support\Str;
 
 class BookController extends Controller
@@ -12,15 +13,21 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
+        $recentlyAddedBooks = Book::latest()->take(5);
 
         return view('pages.admin.books.index', [
-            'books' => $books
+            'recentlyAddedBooks' => $recentlyAddedBooks->all(),
+            'books' => $books,
         ]);
     }
 
     public function create()
     {
-        return view('pages.admin.books.create');
+        $categories = Category::all();
+
+        return view('pages.admin.books.create', [
+            'categories' => $categories,
+        ]);
     }
 
     public function store(StoreBookRequest $request)
@@ -32,7 +39,9 @@ class BookController extends Controller
         $bookData['cover'] = $bookCoverfile;
         $bookData['slug'] = Str::of($request->title)->slug('-');
 
-        Book::create($bookData);
+        $book = Book::create($bookData);
+
+        $book->categories()->attach($bookData['category_id']);
 
         return redirect(route('admin.books.index'))
             ->with('success', 'Book created successfully');

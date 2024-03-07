@@ -1,6 +1,9 @@
 <div class="drawer-side">
     <label for="side-nav" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="w-64 min-h-full p-4 menu bg-base-200 text-base-content">
+        <li class="flex items-center">
+            <img src="{{ asset('img/logo/logo.png') }}" alt="" class="w-36">
+        </li>
         <li>
             <a href="{{ route('home') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -13,7 +16,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('bookmark') }}" class="flex items-center px-6 py-3">
+            <a href="{{ route('collections.show') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
