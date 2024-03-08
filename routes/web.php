@@ -24,6 +24,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
+Route::get('/', function () {
+    return redirect(route('login.show'));
+});
+
 Route::get('/profile', function () {
     return view('profile.index');
 })->name('profile');
