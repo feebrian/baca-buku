@@ -11,7 +11,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     // admin route
     Route::prefix('admin')
+        ->middleware(['role:admin'])
         ->name('admin.')
         ->group(function () {
 
@@ -86,6 +86,7 @@ Route::middleware(['auth'])->group(function () {
 
     // peminjam route
     Route::prefix('loan')
+        ->middleware(['role:peminjam'])
         ->name('loan.')
         ->group(function () {
             Route::post('/loan', [LoanController::class, 'makeLoan'])->name('perform');
