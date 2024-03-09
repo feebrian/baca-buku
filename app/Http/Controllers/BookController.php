@@ -6,6 +6,7 @@ use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Requests\Book\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class BookController extends Controller
@@ -50,9 +51,18 @@ class BookController extends Controller
     public function show(string $slug)
     {
         $book = Book::where('slug', $slug)->first();
+        $bookOnCollection;
+
+        $book_id = $book->id;
+        $user_id = auth()->user()->id;
+
+        $isSaved = User::find($user_id)->books()
+            ->where('book_id', $book_id)
+            ->first();
 
         return view('book-detail', [
             'book' => $book,
+            'bookOnCollection' => ($isSaved ? $bookOnCollection = true : $bookOnCollection = false),
         ]);
     }
 

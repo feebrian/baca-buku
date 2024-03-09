@@ -32,12 +32,9 @@ class CollectionController extends Controller
     {
         $collectionData = $request->validated();
 
-        $user_id = $collectionData['user_id'];
-        $book_id = $collectionData['book_id'];
+        $user = User::find($collectionData['user_id']);
+        $user->books()->detach($collectionData['book_id']);
 
-        $book = DB::table('collections')
-            ->where('user_id', '=', $user_id)
-            ->where('book_id', '=', $book_id)
-            ->get();
+        return redirect(route('collections.show'));
     }
 }
