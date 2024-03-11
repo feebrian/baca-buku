@@ -20,14 +20,15 @@
             </label>
             <label class="w-full max-w-xs form-control">
                 <div class="label">
-                    <span class="label-text">What is your name?</span>
+                    <span class="label-text">Password</span>
                 </div>
                 <input type="password" name="password" class="w-full max-w-xs input input-bordered" />
             </label>
-            <label class="block mt-4 ">
-                <span class="text-gray-700">Repeat passowrd</span>
-                <input type="password" name="repeat_password"
-                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label class="w-full max-w-xs form-control">
+                <div class="label">
+                    <span class="label-text">Repeat Password</span>
+                </div>
+                <input type="password" name="repeat_password" class="w-full max-w-xs input input-bordered" />
             </label>
             <button type="submit"
                 class="w-full py-2 mt-4 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 font">Sign

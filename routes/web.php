@@ -27,20 +27,6 @@ Route::get('/', function () {
     return redirect(route('login.show'));
 });
 
-Route::get('/profile', function () {
-    return view('profile.index');
-})->name('profile');
-
-Route::get('/profile/edit', function () {
-    return view('profile.edit');
-})->name('profile.edit');
-
-Route::get('/settings', function () {
-    return view('settings');
-})->name('settings');
-
-Route::get('/books/details', [BookController::class, 'show'])->name('books.show');
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'index'])->name('register.show');
     Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
@@ -85,22 +71,40 @@ Route::middleware(['auth'])->group(function () {
         });
 
     // peminjam route
-    Route::prefix('loan')
-        ->middleware(['role:peminjam'])
-        ->name('loan.')
-        ->group(function () {
-            Route::post('/loan', [LoanController::class, 'makeLoan'])->name('perform');
-        });
+    Route::middleware(['role:peminjam'])->group(function () {
+        Route::prefix('loan')
+            ->name('loan.')
+            ->group(function () {
+                Route::post('/loan', [LoanController::class, 'makeLoan'])->name('perform');
+            });
 
-    Route::prefix('collections')
-        ->name('collections.')
-        ->group(function () {
-            Route::get('/', [CollectionController::class, 'index'])->name('show');
-            Route::post('/', [CollectionController::class, 'saveBookToCollection'])->name('save');
-            Route::delete('/', [CollectionController::class, 'removeBookFromCollection'])->name('delete');
-        });
+        Route::prefix('collections')
+            ->name('collections.')
+            ->group(function () {
+                Route::get('/', [CollectionController::class, 'index'])->name('show');
+                Route::post('/', [CollectionController::class, 'saveBookToCollection'])->name('save');
+                Route::delete('/', [CollectionController::class, 'removeBookFromCollection'])->name('delete');
+            });
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/books/details/{slug}', [BookController::class, 'show'])->name('books.show');
-    Route::post('/review', [BookReviewController::class, 'writeReview'])->name('review.perform');
+        Route::prefix('/user')
+            ->name('user.')
+            ->group(function () {
+                Route::get('/profile', function () {
+                    return view('profile.index');
+                })->name('profile');
+
+                Route::get('/profile/edit', function () {
+                    return view('profile.edit');
+                })->name('profile.edit');
+
+                Route::get('/settings', function () {
+                    return view('settings');
+                })->name('settings');
+            });
+
+        Route::get('/books/details', [BookController::class, 'show'])->name('books.show');
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('/books/details/{slug}', [BookController::class, 'show'])->name('books.show');
+        Route::post('/review', [BookReviewController::class, 'writeReview'])->name('review.perform');
+    });
 });

@@ -11,6 +11,7 @@ class BookReviewController extends Controller
     public function writeReview(BookReviewRequest $request)
     {
         $reviewData = $request->validated();
+        // dd($reviewData);
         Review::create($reviewData);
         return back();
     }

@@ -50,6 +50,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * The model's default value for attribute
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'role' => 'peminjam'
+    ];
+
     public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class);

@@ -14,10 +14,10 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-        $recentlyAddedBooks = Book::latest()->take(5);
+        // $recentlyAddedBooks = Book::latest()->take(5);
 
         return view('pages.admin.books.index', [
-            'recentlyAddedBooks' => $recentlyAddedBooks->all(),
+            // 'recentlyAddedBooks' => $recentlyAddedBooks->all(),
             'books' => $books,
         ]);
     }

@@ -27,7 +27,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('settings') }}" class="flex items-center px-6 py-3">
+            <a href="{{ route('user.settings') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,7 +38,7 @@
                 <span class="ml-4">Settings</span>
             </a>
         </li>
-        <li><a href="{{ route('profile') }}" class="flex items-center px-6 py-3">
+        <li><a href="{{ route('user.profile') }}" class="flex items-center px-6 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"

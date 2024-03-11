@@ -15,7 +15,7 @@
                 </p> --}}
 
                 <div class="flex items-center justify-center mt-4 space-x-2">
-                    <a href="{{ route('profile.edit') }}"
+                    <a href="{{ route('user.profile.edit') }}"
                         class="px-4 py-2 text-sm font-medium bg-gray-300 rounded-full focus:bg-gray-400">Edit
                         Profil</a>
                     <a href="#"
