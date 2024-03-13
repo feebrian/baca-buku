@@ -3,9 +3,11 @@
 @section('content')
     <div class="container justify-center mx-auto">
         <div class="flex flex-col max-w-sm p-4 mx-auto lg:max-w-7xl md:max-w-3xl md:flex-row">
-            <div class="flex flex-col place-items-center md:place-items-start">
+            <div class="flex flex-col w-40 place-items-center text-wrap md:place-items-start">
                 <img src="{{ asset('storage/covers/' . $book->cover) }}" alt="" class="w-40">
-                <span class="mt-2 font-semibold">{{ $book->title }}</span>
+                <span>
+                    <span class="mt-2 font-semibold">{{ $book->title }}</span>
+                </span>
                 <span>by
                     <span class="text-sm font-semibold text-gray-700">{{ $book->writer }}</span>
                 </span>
@@ -36,9 +38,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-col md:ml-4">
+            <div class="flex flex-col w-full max-w-4xl md:ml-4">
 
-                <div class="mt-4 text-sm md:mt-0">
+                <div class="max-w-4xl mt-4 text-sm w-max md:mt-0">
                     {!! $book->synopsis !!}
                 </div>
 
@@ -64,7 +66,7 @@
                                 {{ $c->name }}
                             @endforeach
                         </span>
-                        <span class="text-sm font-normal">{{ $book->rating }} / 5</span>
+                        <span class="text-sm font-normal">{{ !$book->rating ? 0 : $book->rating }} / 5</span>
                         <span class="text-sm font-normal">{{ $book->stock }}</span>
                     </div>
                 </div>
@@ -111,46 +113,88 @@
                             @endif
                         </button>
                     </form>
+                </div>
 
+                <div class="flex flex-col max-w-4xl mt-8 space-x-2">
+                    <span class="mb-2 font-semibold">Tulis Review Kamu</span>
+                    <form action="{{ route('review.perform') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                        <textarea placeholder="disinii" name="review" class="w-full textarea textarea-bordered textarea-sm"></textarea>
+                        <div class="flex items-center justify-between mt-1">
+                            <div class="rating rating-sm">
+                                <input type="radio" value="1" name="rating"
+                                    class="bg-orange-400 mask mask-star-2" checked />
+                                <input type="radio" value="2" name="rating"
+                                    class="bg-orange-400 mask mask-star-2" />
+                                <input type="radio" value="3" name="rating"
+                                    class="bg-orange-400 mask mask-star-2" />
+                                <input type="radio" value="4" name="rating"
+                                    class="bg-orange-400 mask mask-star-2" />
+                                <input type="radio" value="5" name="rating"
+                                    class="bg-orange-400 mask mask-star-2" />
+                            </div>
+                            <button class="uppercase btn btn-neutral btn-sm">Send</button>
+                        </div>
+                    </form>
+                    <span class="mt-4 mb-4 text-lg font-semibold ">Review dan Rating
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="inline w-3 h-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                        {{ $book->title }}</span>
+                    @foreach ($book->reviews as $r)
+                        <div class="flex flex-col mb-2 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="avatar">
+                                        <div class="w-8 rounded-full shadow">
+                                            <img src="{{ $r->users->profile_picture }}" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-semibold ">{{ $r->users->username }}</span>
+                                        <span
+                                            class="text-xs font-medium text-gray-500">{{ date('j M Y', strtotime($r->created_at)) }}</span>
+                                    </div>
+                                </div>
 
+                                <div class="flex items-center">
+                                    <div class="relative">
+                                        <div class="flex items-center">
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="#b0b0b0" class="w-3 h-3">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+
+                                        <div class="absolute top-0 flex items-center">
+                                            @for ($i = 1; $i < round($book->rating, PHP_ROUND_HALF_DOWN); $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="#fb923c" class="w-3 h-3">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">{{ $r->review }}</span>
+
+                            <div class="divider"></div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
         </div>
-
-
-        <div class="flex items-center mt-4 space-x-2">
-            <div class="avatar">
-                <div class="w-8 rounded-full">
-                    <img src="{{ auth()->user()->profile_picture }}" />
-                </div>
-            </div>
-            <form action="{{ route('review.perform') }}" method="POST" class="w-full">
-                @csrf
-                <input type="hidden" name="book_id" value="{{ $book->id }}">
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                <textarea placeholder="Text here" name="review" class="w-full textarea textarea-bordered textarea-sm"></textarea>
-                <div class="flex items-center justify-between mt-1">
-                    <div class="rating rating-sm">
-                        <input type="radio" value="1" name="rating" class="bg-orange-400 mask mask-star-2"
-                            checked />
-                        <input type="radio" value="2" name="rating" class="bg-orange-400 mask mask-star-2" />
-                        <input type="radio" value="3" name="rating" class="bg-orange-400 mask mask-star-2" />
-                        <input type="radio" value="4" name="rating" class="bg-orange-400 mask mask-star-2" />
-                        <input type="radio" value="5" name="rating" class="bg-orange-400 mask mask-star-2" />
-                    </div>
-                    <button class="btn btn-neutral btn-sm">Send</button>
-                </div>
-            </form>
-        </div>
-        <span class="mt-4 text-base font-semibold">Review</span>
-        @foreach ($book->reviews as $r)
-            <div class="flex flex-col mb-2">
-                <span class="text-sm font-semibold ">{{ $r->users->username }}</span>
-                <span>{{ $r->review }}</span>
-            </div>
-        @endforeach
-
 
     </div>
 

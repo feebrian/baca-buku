@@ -11,7 +11,7 @@
                     <span class="label-text">Email</span>
                 </div>
                 <input type="text" placeholder="example@somewhere.com" name="email"
-                    class="w-full max-w-xs input input-bordered" />
+                    class="w-full max-w-xs input input-bordered" autofocus />
             </label>
             <label class="w-full max-w-xs form-control">
                 <div class="label">

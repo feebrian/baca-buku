@@ -9,7 +9,8 @@
                 <div class="label">
                     <span class="label-text">Username</span>
                 </div>
-                <input type="text" placeholder="ladybug" name="username" class="w-full max-w-xs input input-bordered" />
+                <input type="text" placeholder="ladybug" name="username" class="w-full max-w-xs input input-bordered"
+                    autofocus />
             </label>
             <label class="w-full max-w-xs form-control">
                 <div class="label">
